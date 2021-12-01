@@ -10,13 +10,18 @@ import (
 	"net/http"
 
 	"github.com/go-chi/chi"
+	"github.com/nelbermora/go-interfaces/config"
+	"github.com/nelbermora/go-interfaces/internal/clients/db"
 )
 
-// esta func sirve para inicializar las dependencias necesarios
+// esta func sirve para inicializar las dependencias necesarias
 func SetupDependencies() (http.Handler, error) {
 	// se utiliza chi para crear el router
 	// en nuestro template oficial hay una funcion del template que se encarga de crear el router por nosotros
+	cfg := config.ResolveConfiguration()
 	router := chi.NewRouter()
+	// se inicializa la db
+	db.InitializeDB(cfg)
 	// en la funcion setupHandlers se hace la definicion de cada endpoint y su funcion controladora asociada
 	setupHandlers(router)
 

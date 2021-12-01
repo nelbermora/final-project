@@ -5,7 +5,6 @@ import (
 	"log"
 	"net/http"
 
-	"github.com/nelbermora/go-interfaces/internal/clients/db"
 	"github.com/nelbermora/go-interfaces/internal/server"
 )
 
@@ -14,8 +13,6 @@ func main() {
 	// y las respectivas funciones asociadas a cada ruta
 	// el router es un objeto del tipo http.Handler, es transparente con cual libreria se genero (chi, mux, gin, native.. etc).
 	router, _ := server.SetupDependencies()
-	// se inicializa la db
-	db.InitializeDB()
 	// se levanta el servidor indicando con el puerto y el router definido previamente
 	log.Println("inicializando app")
 	err := http.ListenAndServe(":18080", router)
